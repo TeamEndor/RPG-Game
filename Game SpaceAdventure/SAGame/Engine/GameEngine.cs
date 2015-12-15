@@ -32,7 +32,7 @@ namespace SAGame.Engine
             Execute(comandInfo);
         }
 
-        public virtual void Execute(string[] comandInfo)
+        protected virtual void Execute(string[] comandInfo)
         {
             switch (comandInfo[0].ToLower())
             {

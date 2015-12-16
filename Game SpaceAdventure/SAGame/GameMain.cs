@@ -14,7 +14,7 @@ namespace SAGame
 
         public static void Main()
         {
-            IEngine engin = new GameEngine();
+            IEngine engin = new Engine.Engine();
             engin.Run();
         }
     }

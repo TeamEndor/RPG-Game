@@ -1,7 +1,7 @@
 ﻿namespace SAGame.Interfaces
 {
-    public interface IPlanet: IGameObject, IResource
+    public interface IPlanet : IGameObject
     {
-        string Name { get; set; }
+        
     }
 }

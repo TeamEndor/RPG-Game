@@ -48,7 +48,6 @@
   <ItemGroup>
     <Compile Include="Engine\Engine.cs" />
     <Compile Include="Engine\MapCreator.cs" />
-    <Compile Include="Enums\ProvisionType.cs" />
     <Compile Include="Enums\ItemState.cs" />
     <Compile Include="Interfaces\IAttack.cs" />
     <Compile Include="Interfaces\ICharacter.cs" />

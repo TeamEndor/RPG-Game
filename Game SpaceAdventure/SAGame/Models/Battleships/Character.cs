@@ -5,16 +5,29 @@ namespace SAGame.Models
 {
     public abstract class Character : ICharacter
     {
-
+        private int energy;
         private int damage;
         private int damageStatus;
         private Position position;
 
-        protected Character(int damage, int damageStatus, Position position)
+        protected Character(int energy, int damage, int damageStatus, Position position)
         {
+            this.Energy = energy;
             this.Damage = damage;
             this.DamageStatus = damageStatus;
             this.Position = position;
+        }
+
+        public int Energy
+        {
+            get
+            {
+                
+            }
+            set
+            {
+                
+            }
         }
 
         public int Damage
@@ -40,12 +53,22 @@ namespace SAGame.Models
 
         public void Attack(ICharacter enemy)
         {
-            int damageInflicted = this.Damage - enemy.DamageStatus;
-
-            if (damageInflicted > 0)
+            
+            while (enemy.DamageStatus != 0)
             {
-                enemy.DamageStatus-= this.Damage;
+                enemy.DamageStatus =- this.Damage;
+
+                if (Energy < 100)
+                {
+                    this.Energy ++;
+                }
+
+                if (Energy == 100)
+                {
+                   enemy.DamageStatus =- 2 * this.Damage; ;
+                }
             }
+            
         }
 
         public void Move()

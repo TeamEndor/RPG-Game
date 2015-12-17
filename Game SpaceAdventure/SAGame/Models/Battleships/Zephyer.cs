@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SAGame.Models.Battleships
 {
-    public class Zephyer
+    public class Zephyer:Player
     {
     }
 }

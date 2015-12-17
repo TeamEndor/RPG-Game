@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace SAGame.Models.Battleships
 {
-    public class WarShip
+    public class WarShip: Character
     {
+        private const int DefaultGunShipDamageStatus = 270;
+        private const int DefaultGunshipDamage = 100;
+
+        public WarShip(Position position) : base(DefaultGunshipDamage, DefaultGunShipDamageStatus, position)
+        {
+        }
     }
 }

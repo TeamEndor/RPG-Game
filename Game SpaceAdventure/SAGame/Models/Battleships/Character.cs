@@ -5,75 +5,64 @@ namespace SAGame.Models
 {
     public abstract class Character : ICharacter
     {
-        private int energy;
+       
         private int damage;
         private int damageStatus;
         private Position position;
 
-        protected Character(int energy, int damage, int damageStatus, Position position)
+        protected Character(int damage, int damageStatus, Position position)
         {
-            this.Energy = energy;
+            
             this.Damage = damage;
             this.DamageStatus = damageStatus;
             this.Position = position;
         }
-
-        public int Energy
+        
+        public virtual int Damage
         {
-            get
-            {
-                
-            }
+            get { return this.damage; }
             set
             {
-                
+                if (value < 0)
+                {
+                    throw new ArgumentOutOfRangeException("Damage should be a positive number");
+                }
+                this.damage = value;
             }
-        }
-
-        public int Damage
-        {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
         }
 
         public int DamageStatus
         {
-            get { throw new NotImplementedException(); }
+            get { return this.damageStatus; }
 
-            set { throw new NotImplementedException(); }
+            set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentOutOfRangeException("DamageStatus should be a positive number");
+                }
+                this.damageStatus = value;
+            }
         }
 
 
         public Position Position
         {
-            get { throw new NotImplementedException(); }
+            get { return this.position; }
 
-            set { throw new NotImplementedException(); }
-        }
-
-        public void Attack(ICharacter enemy)
-        {
-            
-            while (enemy.DamageStatus != 0)
+            set
             {
-                enemy.DamageStatus =- this.Damage;
-
-                if (Energy < 100)
-                {
-                    this.Energy ++;
-                }
-
-                if (Energy == 100)
-                {
-                   enemy.DamageStatus =- 2 * this.Damage; ;
-                }
+                if()
             }
-            
+        }
+        
+        public virtual void Attack(ICharacter enemy)
+        {
+            while (enemy.DamageStatus!= 0)
+            {
+                enemy.DamageStatus = -this.Damage;
+            }
         }
 
-        public void Move()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

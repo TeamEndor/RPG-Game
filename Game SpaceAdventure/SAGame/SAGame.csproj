@@ -58,7 +58,6 @@
     <Compile Include="Interfaces\IEngine.cs" />
     <Compile Include="Interfaces\IEnnemy.cs" />
     <Compile Include="Interfaces\IGameObject.cs" />
-    <Compile Include="Interfaces\IMovable.cs" />
     <Compile Include="Interfaces\IPlanet.cs" />
     <Compile Include="Interfaces\IPlayer.cs" />
     <Compile Include="Interfaces\IReader.cs" />
@@ -69,7 +68,9 @@
     <Compile Include="Items\Weapons\DarkEldar.cs" />
     <Compile Include="Items\Weapons\Imperium.cs" />
     <Compile Include="Items\Weapons\RegularDC17.cs" />
-    <Compile Include="Models\Battleships\Ennemy.cs" />
+    <Compile Include="Items\Weapons\Weapon.cs" />
+    <Compile Include="Models\Battleships\Enemy.cs" />
+    <Compile Include="Models\Battleships\EnnemyFactory.cs" />
     <Compile Include="Models\Battleships\GunShip.cs" />
     <Compile Include="Models\Battleships\Player.cs" />
     <Compile Include="Models\Battleships\Character.cs" />
@@ -98,6 +99,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

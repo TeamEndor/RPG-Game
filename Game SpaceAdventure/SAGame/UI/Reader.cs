@@ -9,9 +9,9 @@ namespace SAGame.UI
 {
     public class Reader : IReader
     {
-        public string Reade()
+        public string ReadLine()
         {
-            return Console.ReadLine(); 
+            return Console.ReadLine();
         }
     }
 }

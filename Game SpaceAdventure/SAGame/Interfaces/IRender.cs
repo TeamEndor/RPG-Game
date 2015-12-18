@@ -2,6 +2,8 @@
 {
     public interface IRender
     {
-        void Render(string output);
+        void WriteLine(string message, params object[] parameters);
+
+        void Clear();
     }
 }

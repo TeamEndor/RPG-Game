@@ -1,9 +1,7 @@
 ﻿namespace SAGame.Interfaces
 {
-    public interface IPlayer : IAttack, IDestroyable, IGameObject, IDamageInflict, ICollect
+    public interface IPlayer : ICharacter, ICollect
     {
         int Munitions { get; set; }
-
-        int QuantityResources { get; set; }
     }
 }

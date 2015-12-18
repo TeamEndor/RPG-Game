@@ -5,19 +5,19 @@ namespace SAGame.Models
 {
     public abstract class Character : ICharacter
     {
-       
+
         private int damage;
         private int damageStatus;
         private Position position;
 
         protected Character(int damage, int damageStatus, Position position)
         {
-            
+
             this.Damage = damage;
             this.DamageStatus = damageStatus;
             this.Position = position;
         }
-        
+
         public virtual int Damage
         {
             get { return this.damage; }
@@ -52,13 +52,13 @@ namespace SAGame.Models
 
             set
             {
-                if()
+                if ()
             }
         }
-        
+
         public virtual void Attack(ICharacter enemy)
         {
-            while (enemy.DamageStatus!= 0)
+            while (enemy.DamageStatus != 0)
             {
                 enemy.DamageStatus = -this.Damage;
             }

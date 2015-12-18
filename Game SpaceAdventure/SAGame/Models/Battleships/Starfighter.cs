@@ -8,14 +8,17 @@ namespace SAGame.Models.Battleships
 {
     public class Starfighter: Player
     {
-        private const int DefaultPlayerDamageStatus = 300;
-        private const int DefaultPlayerDamage = 75;
-        private const int DefaultPlayerEnergy = 100;
-        private const int DefaultPlayerMunitions = 200;
-        private const int DefaultPlayerQuantityResources = 150;
+        private const int DefaultPlayerXPosition = 0;
+        private const int DefaultPlayerYPosition = 0;
+        
+        private const int DefaultStartfighterMunitions = 100;
+        private const int DefaultStartfighterEnergy = 100;
+        private const int DefaultStartfighterDamage = 75;
+        private const int DefaultStartfighterDamageStatus = 140;
+       
 
-
-        public Starfighter(int energy, int munitions, int quantityResources, int damage) : base(energy, munitions, quantityResources, damage)
+        public Starfighter() :
+            base(DefaultStartfighterMunitions, DefaultStartfighterEnergy, DefaultStartfighterDamage,DefaultStartfighterDamageStatus, new Position(DefaultPlayerXPosition, DefaultPlayerYPosition))
         {
         }
     }

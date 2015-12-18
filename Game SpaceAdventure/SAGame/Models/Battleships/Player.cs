@@ -149,6 +149,7 @@ namespace SAGame.Models.Battleships
             this.inventory.Add(item);
         }
 
+
         public void CollectMunitions()
         {
             while (this.Munitions < intialNumberOfMunitions)

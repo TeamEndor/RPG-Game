@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Engine\Constants.cs" />
     <Compile Include="Engine\Engine.cs" />
     <Compile Include="Engine\MapCreator.cs" />
     <Compile Include="Enums\ItemState.cs" />
@@ -62,30 +63,21 @@
     <Compile Include="Interfaces\IPlayer.cs" />
     <Compile Include="Interfaces\IReader.cs" />
     <Compile Include="Interfaces\IRender.cs" />
-    <Compile Include="Interfaces\IStarshipUnit.cs" />
     <Compile Include="Items\Item.cs" />
-    <Compile Include="Items\Teleports\SpaceTeleport.cs" />
-    <Compile Include="Items\Weapons\DarkEldar.cs" />
+    <Compile Include="Items\Teleports\Teleport.cs" />
     <Compile Include="Items\Weapons\Imperium.cs" />
     <Compile Include="Items\Weapons\RegularDC17.cs" />
     <Compile Include="Items\Weapons\Weapon.cs" />
+    <Compile Include="Models\Battleships\Character.cs" />
     <Compile Include="Models\Battleships\Enemy.cs" />
     <Compile Include="Models\Battleships\EnnemyFactory.cs" />
     <Compile Include="Models\Battleships\GunShip.cs" />
     <Compile Include="Models\Battleships\Player.cs" />
-    <Compile Include="Models\Battleships\Character.cs" />
     <Compile Include="Models\Battleships\RamShip.cs" />
     <Compile Include="Models\Battleships\Starfighter.cs" />
     <Compile Include="Models\Battleships\WarShip.cs" />
     <Compile Include="Models\Battleships\Zephyer.cs" />
-    <Compile Include="Models\Planets\Europha.cs" />
-    <Compile Include="Models\Planets\Gadon.cs" />
-    <Compile Include="Models\Planets\Kaikielieus.cs" />
-    <Compile Include="Models\Planets\Planet.cs" />
     <Compile Include="GameMain.cs" />
-    <Compile Include="Models\StarshipUnits\ConsularShip.cs" />
-    <Compile Include="Models\StarshipUnits\Unit.cs" />
-    <Compile Include="Models\StarshipUnits\Victorious.cs" />
     <Compile Include="Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\Reader.cs" />
@@ -99,7 +91,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

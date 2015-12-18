@@ -14,6 +14,10 @@ namespace SAGame.Engine
         private bool GameIsRunning = true;
         private IReader reader;
         private IRender render;
+        private readonly IList<IGameObject> entities;
+        private readonly IRenderer renderer;
+        private readonly IInputHandler inputHandler;
+        private readonly IPlayer player;
 
         public void Run()
         {

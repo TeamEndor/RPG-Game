@@ -7,19 +7,16 @@ namespace SAGame.Items
 {
     public abstract class Item : ICollectible
     {
-
-
-        public ItemState State
+        private Position position;
+        protected Item(Position position)
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
+            this.Position = position;
+            this.State = ItemState.Available;
         }
+
+        public Position Position { get; set; }
+
+
+        public ItemState State { get; set; }
     }
 }

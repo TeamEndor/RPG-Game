@@ -7,7 +7,7 @@ using SAGame.Interfaces;
 
 namespace SAGame.UI
 {
-    public class Renderer : IRender
+    public class Renderer : IRenderer
     {
         public void WriteLine(string message, params object[] parameters)
         {

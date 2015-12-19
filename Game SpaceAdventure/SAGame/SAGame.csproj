@@ -46,9 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Engine\Constants.cs" />
-    <Compile Include="Engine\Engine.cs" />
-    <Compile Include="Engine\MapCreator.cs" />
+    <Compile Include="Attributes\EnemyAttribute.cs" />
+    <Compile Include="Attributes\ItemAttribute.cs" />
+    <Compile Include="Core\Constants.cs" />
+    <Compile Include="Core\Engine.cs" />
+    <Compile Include="Core\MapCreator.cs" />
     <Compile Include="Enums\ItemState.cs" />
     <Compile Include="Interfaces\IAttack.cs" />
     <Compile Include="Interfaces\ICharacter.cs" />
@@ -69,14 +71,11 @@
     <Compile Include="Items\Weapons\RegularDC17.cs" />
     <Compile Include="Items\Weapons\Weapon.cs" />
     <Compile Include="Models\Battleships\Character.cs" />
-    <Compile Include="Models\Battleships\Enemy.cs" />
-    <Compile Include="Models\Battleships\EnemyFactory.cs" />
     <Compile Include="Models\Battleships\GunShip.cs" />
     <Compile Include="Models\Battleships\Player.cs" />
     <Compile Include="Models\Battleships\RamShip.cs" />
     <Compile Include="Models\Battleships\Starfighter.cs" />
     <Compile Include="Models\Battleships\WarShip.cs" />
-    <Compile Include="Models\Battleships\Zephyer.cs" />
     <Compile Include="GameMain.cs" />
     <Compile Include="Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

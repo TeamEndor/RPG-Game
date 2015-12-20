@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-namespace SAGame.Items.Weapons
+namespace SAGame_v0._2.Items.Weapons
 {
-    
-    public class RegularDC17: Weapon
+    public class RegularDC17 : Weapon
     {
         //Item
         private const int DefaultRegularDC17Damage = 100;

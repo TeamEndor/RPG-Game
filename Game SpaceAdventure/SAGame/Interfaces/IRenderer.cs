@@ -2,7 +2,7 @@
 {
     public interface IRenderer
     {
-        void WriteLine(string message, params object[] parameters);
+        void WriteLine(string message);
 
         void Clear();
     }

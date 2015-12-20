@@ -1,24 +1,21 @@
-﻿
-using System;
-using SAGame.Core.Engine;
-using SAGame.Enums;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using SAGame_v0._2.Core.Engine;
+using SAGame_v0._2.Interfaces;
+using SAGame_v0._2.UI;
 
-namespace SAGame
+namespace SAGame_v0._2
 {
-    using Models.Battleships;
-    using Interfaces;
-    using Items;
-    using Items.Weapons;
-    using UI;
-
-    public class GameMain
+    class GameMain
     {
-
-        public static void Main()
+        static void Main()
         {
             IInputReader reader = new InputReader();
             IRenderer renderer = new Renderer();
-            
+
             //IPlayer player = new Starfighter();
             //SeedInitialPlayerInventory(player);
 
@@ -35,7 +32,6 @@ namespace SAGame
         //    weapon.State = ItemState.Collected;
         //    player.AddItemToInventory(weapon);
         //}
-
-
     }
 }
+

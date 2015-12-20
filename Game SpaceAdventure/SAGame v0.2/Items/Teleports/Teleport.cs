@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SAGame.Interfaces;
-using SAGame.Models.Battleships;
+using SAGame_v0._2.Interfaces;
+using SAGame_v0._2.Models.PlayerBattleShips;
 
-namespace SAGame.Items.Teleports
+namespace SAGame_v0._2.Items.Teleports
 {
-    public abstract class Teleport:Item
+    public abstract class Teleport : Item
     {
         private readonly IPlayer player;
         private static readonly Random Rand = new Random();
@@ -16,7 +16,7 @@ namespace SAGame.Items.Teleports
         public Teleport(Position position) : base(position)
         {
         }
-        
+
         public void TeleportPlayer(Player player)
         {
             //int randPosX = Rand.Next(1, Constants.MapWidth);

@@ -1,16 +1,16 @@
 ﻿using System;
-using SAGame.Interfaces;
+using SAGame_v0._2.Interfaces;
 
-namespace SAGame.Models.Battleships
+namespace SAGame_v0._2.Models.EnemyBattleShips
 {
-    public abstract class Character : ICharacter
+    public abstract class Enemy : Characters
     {
 
         private int damage;
         private int damageStatus;
         private Position position;
 
-        protected Character(int damage, int damageStatus, Position position)
+        protected Enemy(int damage, int damageStatus, Position position)
         {
 
             this.Damage = damage;

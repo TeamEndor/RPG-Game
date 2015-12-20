@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SAGame.Interfaces;
+using SAGame_v0._2.Interfaces;
 
-namespace SAGame.UI
+namespace SAGame_v0._2.UI
 {
     public class InputReader : IInputReader
     {

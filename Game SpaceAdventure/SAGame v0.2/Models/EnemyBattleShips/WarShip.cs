@@ -1,21 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SAGame.Models.Battleships
+﻿namespace SAGame_v0._2.Models.EnemyBattleShips
 {
-    
-    public class WarShip: Character
+    public class WarShip : Enemy
     {
-        //Enemy
+       
         private const int DefaultGunShipDamageStatus = 270;
         private const int DefaultGunshipDamage = 100;
 
         public WarShip(Position position) : base(DefaultGunshipDamage, DefaultGunShipDamageStatus, position)
         {
         }
-     
+
     }
 }

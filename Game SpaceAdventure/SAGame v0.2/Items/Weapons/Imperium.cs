@@ -4,10 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-namespace SAGame.Items.Weapons
+namespace SAGame_v0._2.Items.Weapons
 {
-    
     public class Imperium : Weapon
     {
         //Item

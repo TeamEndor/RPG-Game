@@ -9,12 +9,12 @@ namespace SAGame_v0._2.Interfaces
 {
     public interface IDataBase
     {
-        IEnumerable<IPlayer> Player { get; }
+        IList<Player> Player { get; }
         IEnumerable<IPlayer> PlayerShipsChoice { get; }
-        IEnumerable<ICharacter> Enemy { get; }
+        IList<ICharacter> Enemy { get; }
 
-        void AddPlayer(IPlayer character);
-        void AddEnemy(ICharacter character);
+        //void AddPlayer(IPlayer character);
+        //void AddEnemy(ICharacter character);
         void AddToPlayerShipsChoice(IPlayer character);
     }
 }

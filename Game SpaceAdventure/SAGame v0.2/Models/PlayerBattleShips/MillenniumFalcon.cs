@@ -8,7 +8,7 @@ namespace SAGame_v0._2.Models.PlayerBattleShips
 {
     class MillenniumFalcon : Player
     {
-        private const string DefaultMillenniumFalconName = "Millennium Falcon";
+        private const string DefaultMillenniumFalconName = "MillenniumFalcon";
         private const int DefaultMillenniumFalconDamage = 100;
         private const int DefaultMillenniumFalconShieldStatus = 160;
         private const int DefaultMillenniumFalconMunitions = 80;

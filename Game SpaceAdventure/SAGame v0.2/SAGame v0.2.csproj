@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Core\Engine\Constants.cs" />
     <Compile Include="Core\Engine\GameEngine.cs" />
+    <Compile Include="Core\Factory.cs" />
     <Compile Include="Enums\ItemState.cs" />
     <Compile Include="GameDataBase\DataBase.cs" />
     <Compile Include="GameMain.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="Interfaces\IDataBase.cs" />
     <Compile Include="Interfaces\IDestroyable.cs" />
     <Compile Include="Interfaces\IEngine.cs" />
+    <Compile Include="Interfaces\IFactory.cs" />
     <Compile Include="Interfaces\IObjectPosition.cs" />
     <Compile Include="Interfaces\IInputReader.cs" />
     <Compile Include="Interfaces\IPlayer.cs" />

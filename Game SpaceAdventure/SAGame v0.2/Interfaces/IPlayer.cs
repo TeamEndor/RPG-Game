@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace SAGame_v0._2.Interfaces
 {
-    public interface IPlayer : ICharacter, ICollect
+    public interface IPlayer : ICollect
     {
-        int Munitions { get; set; }
+        int Munitions { get; }
+        int Energy { get; }
+        void CollectMunitions();
     }
 }

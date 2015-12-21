@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace SAGame_v0._2.Interfaces
 {
-    public interface IPlanet : IGameObject
+    public interface IObjectPosition
     {
+        Position Position { get; set; }
     }
 }

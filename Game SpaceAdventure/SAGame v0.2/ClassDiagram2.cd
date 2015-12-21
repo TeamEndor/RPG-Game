@@ -3,7 +3,7 @@
   <Class Name="SAGame_v0._2.Core.Engine.GameEngine" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="15.75" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAQgAI=</HashCode>
+      <HashCode>AIAAAAAAAAAAAAAAgAIAAAAAAAAAAAAAAAAAAAAQgAI=</HashCode>
       <FileName>Core\Engine\GameEngine.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -18,7 +18,7 @@
   <Class Name="SAGame_v0._2.Items.Item" Collapsed="true">
     <Position X="11" Y="5.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAgAAAAIAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAIAQAAAAEAAAAAAAABAAAAAA=</HashCode>
       <FileName>Items\Item.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -26,28 +26,29 @@
   <Class Name="SAGame_v0._2.Items.Teleports.Teleport" Collapsed="true">
     <Position X="8.75" Y="7" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJAAAAAAAAAAAA=</HashCode>
       <FileName>Items\Teleports\Teleport.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SAGame_v0._2.Items.Weapons.Imperium" Collapsed="true">
     <Position X="11" Y="8.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAgAAAAAAAAAA=</HashCode>
       <FileName>Items\Weapons\Imperium.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SAGame_v0._2.Items.Weapons.RegularDC17" Collapsed="true">
+  <Class Name="SAGame_v0._2.Items.Weapons.RegularDc17" Collapsed="true">
     <Position X="13.25" Y="8.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Items\Weapons\RegularDC17.cs</FileName>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\Weapons\RegularDc17.cs</FileName>
+      <NewMemberFileName>Items\Weapons\RegularDC17.cs</NewMemberFileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SAGame_v0._2.Items.Weapons.Weapon" Collapsed="true">
     <Position X="12" Y="7" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAACAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Items\Weapons\Weapon.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -55,43 +56,42 @@
   <Class Name="SAGame_v0._2.Models.EnemyBattleShips.Enemy" Collapsed="true">
     <Position X="3" Y="10.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAACAAAAAgAAgAAAAIAAAAIAAAAAAAIAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\EnemyBattleShips\Enemy.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SAGame_v0._2.Models.EnemyBattleShips.GunShip" Collapsed="true">
     <Position X="5" Y="12" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAQAAAAAQAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\EnemyBattleShips\GunShip.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SAGame_v0._2.Models.PlayerBattleShips.Player" Collapsed="true">
     <Position X="7.75" Y="10.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQAAQASAAAAAgAQgAAAEIAAAAIAAAAACAIAAAgEAAAA=</HashCode>
+      <HashCode>AQAAQASBCAAAgAQEAAAEAAAAAAAAAgACAAAAAgEAAAA=</HashCode>
       <FileName>Models\PlayerBattleShips\Player.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" />
   </Class>
   <Class Name="SAGame_v0._2.Models.EnemyBattleShips.RamShip" Collapsed="true">
     <Position X="0.75" Y="12" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAEAAEAAAAAA=</HashCode>
       <FileName>Models\EnemyBattleShips\RamShip.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SAGame_v0._2.Models.PlayerBattleShips.StarFighter" Collapsed="true">
     <Position X="7.75" Y="12" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AABAAAABCAAAAAAACAAAAAAAIAAAAAAAAAAAAgAAAAA=</HashCode>
+      <HashCode>AAAEAAAAAAAAQAAACAAAAAAAIAAAAAAAAAAAAgAAAAA=</HashCode>
       <FileName>Models\PlayerBattleShips\StarFighter.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SAGame_v0._2.Models.EnemyBattleShips.WarShip" Collapsed="true">
     <Position X="3" Y="12" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAEAAAAAAAAAABAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\EnemyBattleShips\WarShip.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -114,9 +114,10 @@
   <Class Name="SAGame_v0._2.Models.Characters" Collapsed="true">
     <Position X="5.5" Y="9.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAACAAAAAgAAkAAAAIAQAEIAAAAAAAAAAAAAAEAA=</HashCode>
       <FileName>Models\Characters.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Struct Name="SAGame_v0._2.Position" Collapsed="true">
     <Position X="15.75" Y="5" Width="1.5" />
@@ -135,7 +136,7 @@
   <Interface Name="SAGame_v0._2.Interfaces.ICharacter" Collapsed="true">
     <Position X="3" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Interfaces\ICharacter.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -163,7 +164,7 @@
   <Interface Name="SAGame_v0._2.Interfaces.IDestroyable" Collapsed="true">
     <Position X="1" Y="5.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Interfaces\IDestroyable.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -181,11 +182,11 @@
       <FileName>Interfaces\IEnemy.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="SAGame_v0._2.Interfaces.IGameObject" Collapsed="true">
+  <Interface Name="SAGame_v0._2.Interfaces.IObjectPosition" Collapsed="true">
     <Position X="0.75" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Interfaces\IGameObject.cs</FileName>
+      <FileName>Interfaces\IObjectPosition.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="SAGame_v0._2.Interfaces.IInputReader" Collapsed="true">
@@ -205,7 +206,7 @@
   <Interface Name="SAGame_v0._2.Interfaces.IPlayer" Collapsed="true">
     <Position X="7" Y="4.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AQAAQAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Interfaces\IPlayer.cs</FileName>
     </TypeIdentifier>
   </Interface>

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace SAGame_v0._2.Interfaces
 {
-    public interface ICharacter : IAttack, IDestroyable, IGameObject, IDamageInflict
+    public interface ICharacter : IAttack, IDestroyable, IObjectPosition, IDamageInflict
     {
+        string Name { get; }
     }
 }

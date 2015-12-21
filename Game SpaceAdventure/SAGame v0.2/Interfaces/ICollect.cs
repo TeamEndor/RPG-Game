@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SAGame_v0._2.Items;
 
 namespace SAGame_v0._2.Interfaces
 {
     public interface ICollect
     {
-        IEnumerable<ICollectible> Inventory { get; }
-
-        void AddItemToInventory(ICollectible item);
+        IEnumerable<Item> Inventory { get; }
+        void AddItemToInventory(Item item);
     }
 }

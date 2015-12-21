@@ -43,30 +43,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Engine\Constants.cs" />
     <Compile Include="Core\Engine\GameEngine.cs" />
     <Compile Include="Enums\ItemState.cs" />
+    <Compile Include="GameDataBase\DataBase.cs" />
     <Compile Include="GameMain.cs" />
     <Compile Include="Interfaces\IAttack.cs" />
     <Compile Include="Interfaces\ICharacter.cs" />
     <Compile Include="Interfaces\ICollect.cs" />
     <Compile Include="Interfaces\ICollectible.cs" />
     <Compile Include="Interfaces\IDamageInflict.cs" />
+    <Compile Include="Interfaces\IDataBase.cs" />
     <Compile Include="Interfaces\IDestroyable.cs" />
     <Compile Include="Interfaces\IEngine.cs" />
-    <Compile Include="Interfaces\IEnemy.cs" />
-    <Compile Include="Interfaces\IGameObject.cs" />
+    <Compile Include="Interfaces\IObjectPosition.cs" />
     <Compile Include="Interfaces\IInputReader.cs" />
-    <Compile Include="Interfaces\IPlanet.cs" />
     <Compile Include="Interfaces\IPlayer.cs" />
     <Compile Include="Interfaces\IRenderer.cs" />
     <Compile Include="Items\Item.cs" />
     <Compile Include="Items\Teleports\Teleport.cs" />
     <Compile Include="Items\Weapons\Imperium.cs" />
-    <Compile Include="Items\Weapons\RegularDC17.cs" />
+    <Compile Include="Items\Weapons\RegularDc17.cs" />
     <Compile Include="Items\Weapons\Weapon.cs" />
     <Compile Include="Models\Characters.cs" />
     <Compile Include="Models\EnemyBattleShips\Enemy.cs" />
     <Compile Include="Models\EnemyBattleShips\GunShip.cs" />
+    <Compile Include="Models\PlayerBattleShips\MillenniumFalcon.cs" />
     <Compile Include="Models\PlayerBattleShips\Player.cs" />
     <Compile Include="Models\EnemyBattleShips\RamShip.cs" />
     <Compile Include="Models\PlayerBattleShips\StarFighter.cs" />
@@ -78,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="ClassDiagram2.cd" />
   </ItemGroup>
   <ItemGroup />

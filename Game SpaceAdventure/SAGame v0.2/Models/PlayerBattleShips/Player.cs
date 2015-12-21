@@ -1,91 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using SAGame_v0._2.Interfaces;
+using SAGame_v0._2.Items;
 using SAGame_v0._2.Items.Weapons;
 
 namespace SAGame_v0._2.Models.PlayerBattleShips
 {
     public abstract class Player : Characters, IPlayer
-
     {
+        private const int DefaultPlayerXPosition = 0;
+        private const int DefaultPlayerYPosition = 0;
+
         private int munitions;
         private int energy;
-        private int damage;
-        private int damageStatus;
-        private Position position;
+        private readonly IList<Item> inventory = new List<Item>();
+        private readonly int intialNumberOfMunitions;
 
-        private readonly IList<ICollectible> inventory;
-        private int intialNumberOfMunitions;
-
-        protected Player(int munitions, int energy, int damage, int damageStatus, Position position)
+        protected Player(string name, int damage, int shieldStatus, int munitions, int energy) 
+            : base(name, 
+                  damage, 
+                  shieldStatus, 
+                  new Position(DefaultPlayerXPosition, DefaultPlayerYPosition))
         {
             this.Munitions = munitions;
             this.Energy = energy;
-            this.Damage = damage;
-            this.DamageStatus = damageStatus;
-            this.Position = position;
-            this.inventory = new List<ICollectible>();
-
+            this.intialNumberOfMunitions = this.Munitions;   ///////////////////////////////////////
         }
 
-
-        public int Energy
-        {
-            get { return this.energy; }
-            set
-            {
-                if (value < 0 || value > 100)
-                {
-                    throw new ArgumentOutOfRangeException("Energy should be a positive number in the range [0..100]");
-                }
-                this.energy = value;
-            }
-        }
-
-        public int Damage
-        {
-            get
-            {
-                int damage = this.damage;
-
-                damage = +this.inventory
-                    .Where(w => w is Weapon)
-                    .Cast<Weapon>()
-                    .Select(w => w.Damage)
-                    .Max();
-
-                return damage;
-            }
-            set
-            {
-                if (value < 0)
-                {
-                    throw new ArgumentOutOfRangeException("Damage should be a positive number");
-                }
-                this.damage = value;
-
-            }
-        }
-
-        public int DamageStatus
-        {
-            get { return this.damageStatus; }
-
-            set
-            {
-                if (value < 0)
-                {
-                    throw new ArgumentOutOfRangeException("DamageStatus should be a positive number");
-                }
-                this.damageStatus = value;
-            }
-        }
-
-        public IEnumerable<ICollectible> Inventory
-        {
-            get { return this.inventory; }
-        }
+        public override int Damage => UpdateDamage();
 
         public int Munitions
         {
@@ -97,69 +41,100 @@ namespace SAGame_v0._2.Models.PlayerBattleShips
                     throw new ArgumentException("Munitions should be a positive number");
                 }
                 this.munitions = value;
-                int intialNumberOfMunitions = this.munitions;
             }
         }
 
-        public Position Position
+        public int Energy
         {
-            get
-            {
-                return this.position;
-            }
-
+            get { return this.energy; }
             set
             {
-                throw new NotImplementedException(); /////////////////
+                if (value < 0 || value > 100)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(value), 
+                        "Energy should be a positive number in the range [0..100]");
+                }
+                this.energy = value;
             }
         }
+        public IEnumerable<Item> Inventory => this.inventory;
 
-
-
-        public void Attack(ICharacter enemy)
+        private int UpdateDamage()
         {
-            intialNumberOfMunitions = this.Munitions;
+            int updatedDamage = this.Damage;    //////////////////////////////////////////this.damage
 
-            while (enemy.DamageStatus != 0)
-            {
-                enemy.DamageStatus = -this.Damage;
-
-                if (this.Energy < 100)
-                {
-                    this.Energy++;
-                }
-
-                if (this.Energy == 100)
-                {
-                    enemy.DamageStatus = -2 * this.Damage; ;
-                }
-
-                this.Munitions = -10;
-                if (this.Munitions == 0)
-                {
-                    Console.WriteLine("No more munitions.Please Reload !!! ");
-                    break;
-                }
-            }
+            updatedDamage += this.inventory
+                .Where(w => w is Weapon)
+                .Cast<Weapon>()
+                .Select(w => w.Damage)
+                .Max();
+            return updatedDamage;
         }
 
-        public void AddItemToInventory(ICollectible item)
+        //public override void Attack(ICharacter target)
+        //{
+            //this.intialNumberOfMunitions = this.Munitions;
+
+            //    while (enemy.DamageStatus != 0)
+            //    {
+            //        enemy.DamageStatus = -this.Damage;
+
+            //        if (this.Energy < 100)
+            //        {
+            //            this.Energy++;
+            //        }
+
+            //        if (this.Energy == 100)
+            //        {
+            //            enemy.DamageStatus = -2 * this.Damage; ;
+            //        }
+
+            //        this.Munitions = -10;
+            //        if (this.Munitions == 0)
+            //        {
+            //            //Console.WriteLine("No more munitions.Please Reload !!! ");
+            //            break;
+            //        }
+            //    }
+        //}
+        
+        public void AddItemToInventory(Item item)
         {
             this.inventory.Add(item);
         }
-
-
+        
         public void CollectMunitions()
         {
-            while (this.Munitions < intialNumberOfMunitions)
+            if (this.Munitions <= intialNumberOfMunitions)
             {
-                this.Munitions = +10;
+                this.Munitions += 10;
+            }
 
-                if (this.Munitions == intialNumberOfMunitions)
+            //while (this.Munitions < intialNumberOfMunitions)
+            //{
+            //    this.Munitions += 10;
+
+            //    if (this.Munitions == intialNumberOfMunitions)
+            //    {
+            //        break;
+            //    }
+            //}
+        }
+
+        public override string ToString()
+        {
+            StringBuilder playerStatus = new StringBuilder();
+            playerStatus.Append(base.ToString());
+            playerStatus.AppendFormat(" , munitions: {0}, energy: {1}", this.Munitions, this.Energy);
+            if (this.Inventory.Any())
+            {
+                playerStatus.Append(Environment.NewLine + "Items: ");
+                foreach (var item in Inventory)
                 {
-                    break;
+                    playerStatus.AppendFormat(string.Join(" ,", item.Name));
                 }
             }
+            return playerStatus.ToString();
         }
     }
 }

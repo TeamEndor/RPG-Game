@@ -8,22 +8,28 @@ using SAGame_v0._2.Models.PlayerBattleShips;
 
 namespace SAGame_v0._2.Items.Teleports
 {
-    public abstract class Teleport : Item
+    public class Teleport : Item
     {
-        private readonly IPlayer player;
-        private static readonly Random Rand = new Random();
+        private const string DefaultTeleportName = "Teleport";
+        //private readonly IPlayer player;
+        //private static readonly Random Rand = new Random();
 
-        public Teleport(Position position) : base(position)
+        public Teleport(Position position) 
+            : base(DefaultTeleportName, position)
         {
         }
 
+
         public void TeleportPlayer(Player player)
         {
+            //TODO:
             //int randPosX = Rand.Next(1, Constants.MapWidth);
             //int randPosY = Rand.Next(1, Constants.MapHeight);
 
             //this.player.Position = new Position(this.player.Position.X - randPosX, this.player.Position.Y + randPosY);
 
         }
+
+        
     }
 }

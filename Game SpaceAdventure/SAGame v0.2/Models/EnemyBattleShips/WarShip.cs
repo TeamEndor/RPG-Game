@@ -2,11 +2,12 @@
 {
     public class WarShip : Enemy
     {
-       
-        private const int DefaultGunShipDamageStatus = 270;
-        private const int DefaultGunshipDamage = 100;
+        private const string DefaultWarShipName = "Warship";
+        private const int DefaultWarShipDamage = 100;
+        private const int DefaultWarShipShieldStatus = 270;
 
-        public WarShip(Position position) : base(DefaultGunshipDamage, DefaultGunShipDamageStatus, position)
+        public WarShip(Position position) 
+            : base(DefaultWarShipName, DefaultWarShipDamage, DefaultWarShipShieldStatus, position)
         {
         }
 

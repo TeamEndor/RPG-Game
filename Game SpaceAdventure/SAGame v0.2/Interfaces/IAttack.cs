@@ -8,6 +8,6 @@ namespace SAGame_v0._2.Interfaces
 {
     public interface IAttack
     {
-        void Attack(ICharacter enemy);
+        void Attack(ICharacter target);
     }
 }

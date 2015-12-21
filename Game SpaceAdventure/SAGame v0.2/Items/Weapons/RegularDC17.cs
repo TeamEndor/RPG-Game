@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace SAGame_v0._2.Items.Weapons
 {
-    public class RegularDC17 : Weapon
+    public class RegularDc17 : Weapon
     {
-        //Item
-        private const int DefaultRegularDC17Damage = 100;
-
-        public RegularDC17(Position position) : base(position, DefaultRegularDC17Damage)
+        private const string DefaultRegularDc17Name = "RegularDC17";
+        private const int DefaultRegularDc17Damage = 100;
+        
+        public RegularDc17(Position position) 
+            : base(DefaultRegularDc17Name, position, DefaultRegularDc17Damage)
         {
         }
     }

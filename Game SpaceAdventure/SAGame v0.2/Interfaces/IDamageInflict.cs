@@ -8,6 +8,6 @@ namespace SAGame_v0._2.Interfaces
 {
     public interface IDamageInflict
     {
-        int Damage { get; set; }
+        int Damage { get; }
     }
 }

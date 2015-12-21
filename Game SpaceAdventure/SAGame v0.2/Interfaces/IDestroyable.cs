@@ -8,6 +8,6 @@ namespace SAGame_v0._2.Interfaces
 {
     public interface IDestroyable
     {
-        int DamageStatus { get; set; }
+        int ShieldStatus { get; set; }
     }
 }

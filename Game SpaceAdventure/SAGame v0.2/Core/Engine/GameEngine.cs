@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using SAGame_v0._2.Enums;
 using SAGame_v0._2.GameDataBase;
 using SAGame_v0._2.Interfaces;
+using SAGame_v0._2.Items;
 
 namespace SAGame_v0._2.Core.Engine
 {
@@ -17,6 +18,7 @@ namespace SAGame_v0._2.Core.Engine
         private readonly IRenderer renderer;
         private readonly IDataBase dataBase;
         private readonly IFactory factory;
+        
 
         public GameEngine(IInputReader reader, IRenderer renderer, IDataBase dataBase, IFactory factory)
         {
@@ -57,28 +59,28 @@ namespace SAGame_v0._2.Core.Engine
                         this.dataBase.Player[0].Position.X, this.dataBase.Player[0].Position.Y - 1);
                     this.renderer.Clear();
                     this.CheckIfInMap();
-                    //this.CheckForCollision();
+                    this.CheckForCollision();
                     break;
                 case "s":           //down
                     this.dataBase.Player[0].Position = new Position(
                         this.dataBase.Player[0].Position.X, this.dataBase.Player[0].Position.Y + 1);
                     this.renderer.Clear();
                     this.CheckIfInMap();
-                    //this.CheckForCollision();
+                    this.CheckForCollision();
                     break;
                 case "a":           //left
                     this.dataBase.Player[0].Position = new Position(
                         this.dataBase.Player[0].Position.X - 1, this.dataBase.Player[0].Position.Y);
                     this.renderer.Clear();
                     this.CheckIfInMap();
-                    //this.CheckForCollision();
+                    this.CheckForCollision();
                     break;
                 case "d":           //right
                     this.dataBase.Player[0].Position = new Position(
                         this.dataBase.Player[0].Position.X + 1, this.dataBase.Player[0].Position.Y);
                     this.renderer.Clear();
                     this.CheckIfInMap();
-                    //this.CheckForCollision();
+                    this.CheckForCollision();
                     break;
                 case "status":
                     this.PrintStatus();
@@ -217,6 +219,81 @@ namespace SAGame_v0._2.Core.Engine
                 }
             }
             return true;
+        }
+
+        private void CheckForCollision()
+        {
+            var collidingObject = this.dataBase.Enemy.
+                FirstOrDefault(e => e.Position.Equals(this.dataBase.Player[0].Position));
+
+            var item = collidingObject as Item;
+
+            if (item != null)
+            {
+                this.dataBase.Player[0].AddItemToInventory(item);
+                this.renderer.WriteLine("Added item to inventory:" + item.GetType().Name);
+                item.State = ItemState.Collected;
+            }
+
+            var enemy = collidingObject as ICharacter;
+
+            if (enemy != null)
+            {
+                this.EnterAttackPhase(enemy);
+            }
+        }
+
+        private void EnterAttackPhase(ICharacter enemy)
+        {
+            if (enemy.ShieldStatus == 0)
+            {
+                return;
+            }
+
+            this.renderer.WriteLine(
+                "Enemy encountered: {0} (damage: {1}, shield status: {2})" ,
+                enemy.GetType().Name,
+                enemy.Damage,
+                enemy.ShieldStatus);
+
+            while (enemy.ShieldStatus > 0)
+            {
+                this.renderer.WriteLine("Do you want to attack? (y/n)");
+
+                string choice = this.reader.ReadLine();
+
+                while (choice != "n" & choice != "y")
+                {
+                    this.renderer.WriteLine("Invalid choice, please enter 'y' or 'n'.");
+                    choice = this.reader.ReadLine();
+                }
+
+                switch (choice)
+                {
+                    case "n":
+                        this.renderer.WriteLine("Loser !!!");
+                        return;
+                    case "y":
+                        this.PerformAttack(enemy);
+                        break;
+                }
+            }
+        }
+        private void PerformAttack(ICharacter enemy)
+        {
+            dataBase.Player[0].Attack(enemy);
+
+            if (enemy.ShieldStatus == 0)
+            {
+                this.dataBase.Enemy.Remove(enemy);
+                this.renderer.WriteLine("Enemy was defeated!");
+                return;
+            }
+
+            enemy.Attack(this.dataBase.Player[0]);
+            this.renderer.WriteLine("Damage taken!");
+            this.renderer.WriteLine("Player hit points: {0}", this.dataBase.Player[0].ShieldStatus);
+            this.renderer.WriteLine("Enemy hit points: {0}" , enemy.ShieldStatus);
         }
 
         private void PrintStatus()

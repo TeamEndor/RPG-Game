@@ -16,7 +16,7 @@ namespace SAGame_v0._2.Models.PlayerBattleShips
         private int munitions;
         private int energy;
         private readonly IList<Item> inventory = new List<Item>();
-        private readonly int intialNumberOfMunitions;
+        private  int intialNumberOfMunitions;
 
         protected Player(string name, int damage, int shieldStatus, int munitions, int energy) 
             : base(name, 
@@ -71,33 +71,28 @@ namespace SAGame_v0._2.Models.PlayerBattleShips
             return updatedDamage;
         }
 
-        //public override void Attack(ICharacter target)
-        //{
-            //this.intialNumberOfMunitions = this.Munitions;
+        public override void Attack(ICharacter target)
+        {
+            this.intialNumberOfMunitions = this.Munitions;
 
-            //    while (enemy.DamageStatus != 0)
-            //    {
-            //        enemy.DamageStatus = -this.Damage;
+            while (target.ShieldStatus != 0)
+            {
+                target.ShieldStatus = -this.Damage;
 
-            //        if (this.Energy < 100)
-            //        {
-            //            this.Energy++;
-            //        }
+                if (this.Energy < 100)
+                {
+                    this.Energy++;
+                }
 
-            //        if (this.Energy == 100)
-            //        {
-            //            enemy.DamageStatus = -2 * this.Damage; ;
-            //        }
+                if (this.Energy == 100)
+                {
+                    target.ShieldStatus -= 2 * this.Damage; ;
+                }
 
-            //        this.Munitions = -10;
-            //        if (this.Munitions == 0)
-            //        {
-            //            //Console.WriteLine("No more munitions.Please Reload !!! ");
-            //            break;
-            //        }
-            //    }
-        //}
-        
+                this.Munitions -= 10;
+            }
+        }
+
         public void AddItemToInventory(Item item)
         {
             this.inventory.Add(item);

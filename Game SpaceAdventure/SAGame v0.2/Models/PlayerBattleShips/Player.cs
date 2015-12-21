@@ -15,8 +15,7 @@ namespace SAGame_v0._2.Models.PlayerBattleShips
 
         private int munitions;
         private int energy;
-        private readonly IList<Item> inventory = new List<Item>();
-        private readonly int intialNumberOfMunitions;
+       private readonly int intialNumberOfMunitions;
 
         protected Player(string name, int damage, int shieldStatus, int munitions, int energy) 
             : base(name, 
@@ -57,17 +56,16 @@ namespace SAGame_v0._2.Models.PlayerBattleShips
                 this.energy = value;
             }
         }
-        public IEnumerable<Item> Inventory => this.inventory;
-
+       
         private int UpdateDamage()
         {
             int updatedDamage = this.Damage;    //////////////////////////////////////////this.damage
-
-            updatedDamage += this.inventory
-                .Where(w => w is Weapon)
-                .Cast<Weapon>()
-                .Select(w => w.Damage)
-                .Max();
+            
+            //updatedDamage += this.inventory
+            //    .Where(w => w is Weapon)
+            //    .Cast<Weapon>()
+            //    .Select(w => w.Damage)
+            //    .Max();
             return updatedDamage;
         }
 
@@ -97,30 +95,7 @@ namespace SAGame_v0._2.Models.PlayerBattleShips
             //        }
             //    }
         //}
-        
-        public void AddItemToInventory(Item item)
-        {
-            this.inventory.Add(item);
-        }
-        
-        public void CollectMunitions()
-        {
-            if (this.Munitions <= intialNumberOfMunitions)
-            {
-                this.Munitions += 10;
-            }
-
-            //while (this.Munitions < intialNumberOfMunitions)
-            //{
-            //    this.Munitions += 10;
-
-            //    if (this.Munitions == intialNumberOfMunitions)
-            //    {
-            //        break;
-            //    }
-            //}
-        }
-
+       
         public override string ToString()
         {
             StringBuilder playerStatus = new StringBuilder();

@@ -12,6 +12,9 @@ namespace SAGame_v0._2.Core.Engine
 {
     public class GameEngine : IEngine
     {
+        private const int MinItemsCount = 3;
+        private const int MaxItemsCount = 8;
+        
         private static readonly Random Rand = new Random();
         private readonly IInputReader reader;
         private readonly IRenderer renderer;
@@ -31,7 +34,8 @@ namespace SAGame_v0._2.Core.Engine
 
             var message = ChooseShipMessage();
             this.renderer.WriteLine(message);
-            this.AddEnemies();
+            this.AddEnemiesAndItems();
+            
             
             while (true)
             {
@@ -106,23 +110,49 @@ namespace SAGame_v0._2.Core.Engine
             return message.ToString();
         }
 
-        private void AddEnemies()
+        private void AddEnemiesAndItems()
         {
+            
             int randEnemyCount = Rand.Next(2, 6);
-
             for (int i = 0; i < randEnemyCount; i++)
             {
-                int randEnemyType = Rand.Next(1, 3);
-                int randPosX = Rand.Next(1, Constants.MapWidth - 1);
-                int randPosY = Rand.Next(1, Constants.MapHeight - 1);
-                var enemy = this.factory.CreateEnemies(randEnemyType, randPosX, randPosY);
+                int randEnemyType = Rand.Next(1, 4);
+                int enemyRandPosX = Rand.Next(1, Constants.MapWidth - 1);
+                int enemyRandPosY = Rand.Next(1, Constants.MapHeight - 1);
+                var enemy = this.factory.CreateEnemies(randEnemyType, enemyRandPosX, enemyRandPosY);
                 this.dataBase.Enemy.Add(enemy);
             }
+
+            //int randItemsCount = Rand.Next(MinItemsCount, MaxItemsCount);
+            //for (int i = 0; i < randItemsCount; i++)
+            //{
+            //    int itemType = Rand.Next(1, 3);
+            //    int itemRandPosX;
+            //    int itemRandPosY;
+            //    bool isEmpty = true;
+            //    do
+            //    {
+            //        itemRandPosX = Rand.Next(1, Constants.MapWidth - 1);
+            //        itemRandPosY = Rand.Next(1, Constants.MapHeight - 1);
+            //        foreach (var enemy in this.dataBase.Enemy)
+            //        {
+            //            if (itemRandPosX != enemy.Position.X || itemRandPosY != enemy.Position.Y)
+            //            {
+            //                isEmpty = false;
+            //                break;
+            //            }
+            //        }
+
+            //    } while (isEmpty);
+
+            //    var item = this.factory.CreateItem(itemType, itemRandPosX, itemRandPosY);
+            //    this.dataBase.AddToItems(item);
+            //}
         }
 
         private void CheckIfInMap()
         {
-            if (this.dataBase.Player[0].Position.Y < 0)                                             //up 
+            if (this.dataBase.Player[0].Position.Y < 0)                                                 //up 
             {
                 this.dataBase.Player[0].Position = new Position(
                         this.dataBase.Player[0].Position.X, this.dataBase.Player[0].Position.Y + 1);
@@ -132,7 +162,7 @@ namespace SAGame_v0._2.Core.Engine
                 this.dataBase.Player[0].Position = new Position(
                        this.dataBase.Player[0].Position.X, this.dataBase.Player[0].Position.Y - 1);     
             }
-            if (this.dataBase.Player[0].Position.X < 0)                                             //left
+            if (this.dataBase.Player[0].Position.X < 0)                                                 //left
             {
                 this.dataBase.Player[0].Position = new Position(
                         this.dataBase.Player[0].Position.X + 1, this.dataBase.Player[0].Position.Y);   
@@ -165,6 +195,19 @@ namespace SAGame_v0._2.Core.Engine
                             }
                         }
                     }
+                    else if (this.dataBase.Items.Any())
+                    {
+                        foreach (var item in this.dataBase.Items)
+                        {
+                            if (item.State == ItemState.Available && (item.Position.X == col && item.Position.Y == row))
+                            {
+                                map.Append(this.ItemName(item.Name));
+                            }
+                            
+                        }
+                    }
+                    
+
                     if (this.CheckIfEmptySpace(col, row))
                     {
                         map.Append('.');
@@ -203,12 +246,26 @@ namespace SAGame_v0._2.Core.Engine
             }
         }
 
+        private char ItemName(string name)
+        {
+            switch (name)
+            {
+                case "RegularDC17":
+                    return 'D';
+                case "Imperium":
+                    return 'I';
+               default:
+                    throw new AggregateException("Unknown ship name!");
+            }
+        }
+
         private bool CheckIfEmptySpace(int col, int row)
         {
             if (this.dataBase.Player[0].Position.X == col && this.dataBase.Player[0].Position.Y == row)
             {
                 return false;
             }
+            
             foreach (var enemy in this.dataBase.Enemy)
             {
                 if ((enemy.ShieldStatus > 0) && (enemy.Position.X == col && enemy.Position.Y == row))
@@ -216,6 +273,15 @@ namespace SAGame_v0._2.Core.Engine
                     return false;
                 }
             }
+
+            foreach (var item in this.dataBase.Items)
+            {
+                if (item.State == ItemState.Available && (item.Position.X == col && item.Position.Y == row))
+                {
+                    return false;
+                }
+            }
+
             return true;
         }
 
@@ -223,15 +289,15 @@ namespace SAGame_v0._2.Core.Engine
         {
             StringBuilder playerStatus = new StringBuilder();
             playerStatus.AppendFormat(this.dataBase.Player[0].ToString());
-            //if (this.dataBase.Inventory.Any())
-            //{
-            //    playerStatus.Append(Environment.NewLine + "Items: ");
-            //    foreach (var item in this.dataBase.Inventory)
-            //    {
-            //        playerStatus.AppendFormat(string.Join(" ,", item.Name));
-            //    }
-            //}
-            //this.renderer.WriteLine(playerStatus.ToString());
+            if (this.dataBase.Inventory.Any())
+            {
+                playerStatus.Append(Environment.NewLine + "Items: ");
+                foreach (var item in this.dataBase.Inventory)
+                {
+                    playerStatus.AppendFormat(string.Join(" ,", item.Name));
+                }
+            }
+            this.renderer.WriteLine(playerStatus.ToString());
         }
 
         protected virtual void PrintHelp()

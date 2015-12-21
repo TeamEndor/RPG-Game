@@ -59,10 +59,6 @@ namespace SAGame_v0._2.Models
 
             set
             {
-                if (value.X < 0 || value.Y < 0)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value), "Position can't be a negative number!");
-                }
                 this.position = value;
             }
         }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using SAGame_v0._2.Enums;
 using SAGame_v0._2.GameDataBase;
 using SAGame_v0._2.Interfaces;
+using SAGame_v0._2.Items;
 
 namespace SAGame_v0._2.Core.Engine
 {
@@ -14,12 +15,16 @@ namespace SAGame_v0._2.Core.Engine
     {
         private const int MinItemsCount = 3;
         private const int MaxItemsCount = 8;
-        
+
+        private const int MinEnemyCount = 2;
+        private const int MaxEnemyCount = 6;
+
         private static readonly Random Rand = new Random();
         private readonly IInputReader reader;
         private readonly IRenderer renderer;
         private readonly IDataBase dataBase;
         private readonly IFactory factory;
+        
 
         public GameEngine(IInputReader reader, IRenderer renderer, IDataBase dataBase, IFactory factory)
         {
@@ -34,7 +39,8 @@ namespace SAGame_v0._2.Core.Engine
 
             var message = ChooseShipMessage();
             this.renderer.WriteLine(message);
-            this.AddEnemiesAndItems();
+            this.AddEnemies();
+            this.AddItems();
             
             
             while (true)
@@ -61,28 +67,28 @@ namespace SAGame_v0._2.Core.Engine
                         this.dataBase.Player[0].Position.X, this.dataBase.Player[0].Position.Y - 1);
                     this.renderer.Clear();
                     this.CheckIfInMap();
-                    //this.CheckForCollision();
+                    this.CheckForCollision();
                     break;
                 case "s":           //down
                     this.dataBase.Player[0].Position = new Position(
                         this.dataBase.Player[0].Position.X, this.dataBase.Player[0].Position.Y + 1);
                     this.renderer.Clear();
                     this.CheckIfInMap();
-                    //this.CheckForCollision();
+                    this.CheckForCollision();
                     break;
                 case "a":           //left
                     this.dataBase.Player[0].Position = new Position(
                         this.dataBase.Player[0].Position.X - 1, this.dataBase.Player[0].Position.Y);
                     this.renderer.Clear();
                     this.CheckIfInMap();
-                    //this.CheckForCollision();
+                    this.CheckForCollision();
                     break;
                 case "d":           //right
                     this.dataBase.Player[0].Position = new Position(
                         this.dataBase.Player[0].Position.X + 1, this.dataBase.Player[0].Position.Y);
                     this.renderer.Clear();
                     this.CheckIfInMap();
-                    //this.CheckForCollision();
+                    this.CheckForCollision();
                     break;
                 case "status":
                     this.PrintStatus();
@@ -110,10 +116,10 @@ namespace SAGame_v0._2.Core.Engine
             return message.ToString();
         }
 
-        private void AddEnemiesAndItems()
+        private void AddEnemies()
         {
             
-            int randEnemyCount = Rand.Next(2, 6);
+            int randEnemyCount = Rand.Next(MinEnemyCount, MaxEnemyCount);
             for (int i = 0; i < randEnemyCount; i++)
             {
                 int randEnemyType = Rand.Next(1, 4);
@@ -122,32 +128,35 @@ namespace SAGame_v0._2.Core.Engine
                 var enemy = this.factory.CreateEnemies(randEnemyType, enemyRandPosX, enemyRandPosY);
                 this.dataBase.Enemy.Add(enemy);
             }
+        }
 
-            //int randItemsCount = Rand.Next(MinItemsCount, MaxItemsCount);
-            //for (int i = 0; i < randItemsCount; i++)
-            //{
-            //    int itemType = Rand.Next(1, 3);
-            //    int itemRandPosX;
-            //    int itemRandPosY;
-            //    bool isEmpty = true;
-            //    do
-            //    {
-            //        itemRandPosX = Rand.Next(1, Constants.MapWidth - 1);
-            //        itemRandPosY = Rand.Next(1, Constants.MapHeight - 1);
-            //        foreach (var enemy in this.dataBase.Enemy)
-            //        {
-            //            if (itemRandPosX != enemy.Position.X || itemRandPosY != enemy.Position.Y)
-            //            {
-            //                isEmpty = false;
-            //                break;
-            //            }
-            //        }
+        private void AddItems()
+        {
+            int randItemsCount = Rand.Next(MinItemsCount, MaxItemsCount);
+            for (int i = 0; i < randItemsCount; i++)
+            {
+                int itemType = Rand.Next(1, 3);
+                int itemRandPosX;
+                int itemRandPosY;
+                bool isEmpty = true;
+                do
+                {
+                    itemRandPosX = Rand.Next(1, Constants.MapWidth - 1);
+                    itemRandPosY = Rand.Next(1, Constants.MapHeight - 1);
+                    foreach (var enemy in this.dataBase.Enemy)
+                    {
+                        if (itemRandPosX != enemy.Position.X || itemRandPosY != enemy.Position.Y)
+                        {
+                            isEmpty = false;
+                            break;
+                        }
+                    }
 
-            //    } while (isEmpty);
+                } while (isEmpty);
 
-            //    var item = this.factory.CreateItem(itemType, itemRandPosX, itemRandPosY);
-            //    this.dataBase.AddToItems(item);
-            //}
+                var item = this.factory.CreateItem(itemType, itemRandPosX, itemRandPosY);
+                this.dataBase.AddToItems(item);
+            }
         }
 
         private void CheckIfInMap()
@@ -283,6 +292,81 @@ namespace SAGame_v0._2.Core.Engine
             }
 
             return true;
+        }
+
+        private void CheckForCollision()
+        {
+            var collidingObject = this.dataBase.Enemy.
+                FirstOrDefault(e => e.Position.Equals(this.dataBase.Player[0].Position));
+
+            var item = collidingObject as Item;
+
+            if (item != null)
+            {
+                this.dataBase.Player[0].AddItemToInventory(item);
+                this.renderer.WriteLine("Added item to inventory:" + item.GetType().Name);
+                item.State = ItemState.Collected;
+            }
+
+            var enemy = collidingObject as ICharacter;
+
+            if (enemy != null)
+            {
+                this.EnterAttackPhase(enemy);
+            }
+        }
+
+        private void EnterAttackPhase(ICharacter enemy)
+        {
+            if (enemy.ShieldStatus == 0)
+            {
+                return;
+            }
+
+            this.renderer.WriteLine(
+                "Enemy encountered: {0} (damage: {1}, shield status: {2})" ,
+                enemy.GetType().Name,
+                enemy.Damage,
+                enemy.ShieldStatus);
+
+            while (enemy.ShieldStatus > 0)
+            {
+                this.renderer.WriteLine("Do you want to attack? (y/n)");
+
+                string choice = this.reader.ReadLine();
+
+                while (choice != "n" & choice != "y")
+                {
+                    this.renderer.WriteLine("Invalid choice, please enter 'y' or 'n'.");
+                    choice = this.reader.ReadLine();
+                }
+
+                switch (choice)
+                {
+                    case "n":
+                        this.renderer.WriteLine("Loser !!!");
+                        return;
+                    case "y":
+                        this.PerformAttack(enemy);
+                        break;
+                }
+            }
+        }
+        private void PerformAttack(ICharacter enemy)
+        {
+            dataBase.Player[0].Attack(enemy);
+
+            if (enemy.ShieldStatus == 0)
+            {
+                this.dataBase.Enemy.Remove(enemy);
+                this.renderer.WriteLine("Enemy was defeated!");
+                return;
+            }
+
+            enemy.Attack(this.dataBase.Player[0]);
+            this.renderer.WriteLine("Damage taken!");
+            this.renderer.WriteLine("Player hit points: {0}", this.dataBase.Player[0].ShieldStatus);
+            this.renderer.WriteLine("Enemy hit points: {0}" , enemy.ShieldStatus);
         }
 
         private void PrintStatus()

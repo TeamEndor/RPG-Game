@@ -9,9 +9,9 @@ namespace SAGame_v0._2.UI
 {
     public class Renderer : IRenderer
     {
-        public void WriteLine(string output)
+        public void WriteLine(string output, params object[] parameters)
         {
-            Console.WriteLine(output);
+            Console.WriteLine(output, parameters);
         }
 
         public void Clear()

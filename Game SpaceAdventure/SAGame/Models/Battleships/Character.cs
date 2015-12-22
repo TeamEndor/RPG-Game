@@ -52,7 +52,7 @@ namespace SAGame.Models.Battleships
 
             set
             {
-                //if ()
+               
                 this.position = value;
             }
         }

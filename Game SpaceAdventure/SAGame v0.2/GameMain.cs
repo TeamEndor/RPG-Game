@@ -21,22 +21,13 @@ namespace SAGame_v0._2
             IRenderer renderer = new Renderer();
             IDataBase dataBase = new DataBase();
             IFactory factory = new Factory();
-            
-            //IPlayer player = new Starfighter();
-            //SeedInitialPlayerInventory(player);
+          
 
             IEngine engine = new GameEngine(reader, renderer, dataBase, factory);
             engine.Run();
         }
 
-        //private static void SeedInitialPlayerInventory(IPlayer player)
-        //{
-        //    Position defaultPosition = new Position(0, 0);
-            
-        //    ICollectible weapon = new RegularDc17(defaultPosition);
-        //    weapon.State = ItemState.Collected;
-        //    player.AddItemToInventory(weapon);
-        //}
+        
     }
 }
 

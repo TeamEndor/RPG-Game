@@ -26,7 +26,7 @@ namespace SAGame_v0._2.Models.PlayerBattleShips
         {
             this.Munitions = munitions;
             this.Energy = energy;
-            this.intialNumberOfMunitions = this.Munitions;   ///////////////////////////////////////
+            this.intialNumberOfMunitions = this.Munitions;   
         }
 
         

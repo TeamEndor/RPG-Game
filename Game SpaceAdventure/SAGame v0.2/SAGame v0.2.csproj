@@ -71,8 +71,8 @@
     <Compile Include="Models\EnemyBattleShips\Enemy.cs" />
     <Compile Include="Models\EnemyBattleShips\GunShip.cs" />
     <Compile Include="Models\PlayerBattleShips\MillenniumFalcon.cs" />
-    <Compile Include="Models\PlayerBattleShips\Player.cs" />
     <Compile Include="Models\EnemyBattleShips\RamShip.cs" />
+    <Compile Include="Models\PlayerBattleShips\Player.cs" />
     <Compile Include="Models\PlayerBattleShips\StarFighter.cs" />
     <Compile Include="Models\EnemyBattleShips\WarShip.cs" />
     <Compile Include="Position.cs" />

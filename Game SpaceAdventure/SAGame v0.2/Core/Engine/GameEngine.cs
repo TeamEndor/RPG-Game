@@ -15,11 +15,11 @@ namespace SAGame_v0._2.Core.Engine
 {
     public class GameEngine : IEngine
     {
-        private const int MinItemsCount = 3;
-        private const int MaxItemsCount = 8;
+        private const int MinItemsCount = 5;
+        private const int MaxItemsCount = 20;
 
-        private const int MinEnemyCount = 2;
-        private const int MaxEnemyCount = 6;
+        private const int MinEnemyCount = 5;
+        private const int MaxEnemyCount = 50;
 
         private static readonly Random Rand = new Random();
         private readonly IInputReader reader;
@@ -137,11 +137,17 @@ namespace SAGame_v0._2.Core.Engine
             int randEnemyCount = Rand.Next(MinEnemyCount, MaxEnemyCount);
             for (int i = 0; i < randEnemyCount; i++)
             {
-                int randEnemyType = Rand.Next(1, 4);
                 int enemyRandPosX = Rand.Next(1, Constants.MapWidth - 1);
                 int enemyRandPosY = Rand.Next(1, Constants.MapHeight - 1);
+                while (this.dataBase.Items.Any(e => e.Position.X == enemyRandPosX && e.Position.Y == enemyRandPosY))
+                {
+                     enemyRandPosX = Rand.Next(1, Constants.MapWidth - 1);
+                     enemyRandPosY = Rand.Next(1, Constants.MapHeight - 1);
+                }
+                int randEnemyType = Rand.Next(1, 4);
                 var enemy = this.factory.CreateEnemies(randEnemyType, enemyRandPosX, enemyRandPosY);
                 this.dataBase.Enemy.Add(enemy);
+
             }
         }
 
@@ -150,29 +156,22 @@ namespace SAGame_v0._2.Core.Engine
             int randItemsCount = Rand.Next(MinItemsCount, MaxItemsCount);
             for (int i = 0; i < randItemsCount; i++)
             {
-                int itemType = Rand.Next(1, 3);
-                int itemRandPosX;
-                int itemRandPosY;
-                bool isEmpty = true;
-                do
+                
+                int itemRandPosX = Rand.Next(1, Constants.MapWidth - 1);
+                int itemRandPosY = Rand.Next(1, Constants.MapHeight - 1);
+
+                while (this.dataBase.Enemy.Any(e => e.Position.X == itemRandPosY && e.Position.Y == itemRandPosY))
                 {
                     itemRandPosX = Rand.Next(1, Constants.MapWidth - 1);
                     itemRandPosY = Rand.Next(1, Constants.MapHeight - 1);
-                    foreach (var enemy in this.dataBase.Enemy)
-                    {
-                        if (itemRandPosX != enemy.Position.X || itemRandPosY != enemy.Position.Y)
-                        {
-                            isEmpty = false;
-                            break;
-                        }
-                    }
-
-                } while (isEmpty);
-
+                }
+                int itemType = Rand.Next(1, 3);
                 var item = this.factory.CreateItem(itemType, itemRandPosX, itemRandPosY);
                 this.dataBase.AddToItems(item);
+
             }
         }
+
 
         private void CheckIfInMap()
         {
@@ -227,12 +226,9 @@ namespace SAGame_v0._2.Core.Engine
                             {
                                 map.Append(this.ItemName(item.Name));
                             }
-                            
                         }
                     }
-                    
-
-                    if (this.CheckIfEmptySpace(col, row))
+                   if (this.CheckIfEmptySpace(col, row))
                     {
                         map.Append('.');
                     }
@@ -397,7 +393,7 @@ namespace SAGame_v0._2.Core.Engine
         {
             if (this.dataBase.Inventory.Any())
             {
-                int updatedDamage = this.dataBase.Player[0].Damage;    //////////////////////////////////////////this.damage
+                int updatedDamage = this.dataBase.Player[0].Damage;   
 
                 updatedDamage += this.dataBase.Inventory
                     .Where(w => w is Weapon)

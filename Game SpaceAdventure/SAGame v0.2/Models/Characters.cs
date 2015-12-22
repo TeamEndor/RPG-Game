@@ -42,10 +42,7 @@ namespace SAGame_v0._2.Models
 
             set
             {
-                if (value < 0)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value), "DamageStatus should be a positive number");
-                }
+                
                 this.shieldStatus = value;
             }
         }
@@ -63,12 +60,13 @@ namespace SAGame_v0._2.Models
             }
         }
 
-        public virtual void Attack(ICharacter target)
+        public  void Attack(ICharacter target)
         {
-            while (target.ShieldStatus > 0 || this.ShieldStatus <= 0)
+
+
+            if (target.ShieldStatus > 0)
             {
                 target.ShieldStatus -= this.Damage;
-                this.ShieldStatus -= target.Damage;
             }
         }
 

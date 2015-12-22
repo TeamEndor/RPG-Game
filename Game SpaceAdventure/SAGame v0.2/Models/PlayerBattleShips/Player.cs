@@ -29,7 +29,7 @@ namespace SAGame_v0._2.Models.PlayerBattleShips
             this.intialNumberOfMunitions = this.Munitions;   ///////////////////////////////////////
         }
 
-        public override int Damage => UpdateDamage();
+        
 
         public int Munitions
         {
@@ -59,63 +59,14 @@ namespace SAGame_v0._2.Models.PlayerBattleShips
         }
         public IEnumerable<Item> Inventory => this.inventory;
 
-        private int UpdateDamage()
-        {
-            int updatedDamage = this.Damage;    //////////////////////////////////////////this.damage
-
-            updatedDamage += this.inventory
-                .Where(w => w is Weapon)
-                .Cast<Weapon>()
-                .Select(w => w.Damage)
-                .Max();
-            return updatedDamage;
-        }
-
-        public override void Attack(ICharacter target)
-        {
-            this.intialNumberOfMunitions = this.Munitions;
-
-            while (target.ShieldStatus != 0)
-            {
-                target.ShieldStatus = -this.Damage;
-
-                if (this.Energy < 100)
-                {
-                    this.Energy++;
-                }
-
-                if (this.Energy == 100)
-                {
-                    target.ShieldStatus -= 2 * this.Damage; ;
-                }
-
-                this.Munitions -= 10;
-            }
-        }
+ 
 
         public void AddItemToInventory(Item item)
         {
             this.inventory.Add(item);
         }
 
-        public void CollectMunitions()
-        {
-            if (this.Munitions <= intialNumberOfMunitions)
-            {
-                this.Munitions += 10;
-            }
-
-            //while (this.Munitions < intialNumberOfMunitions)
-            //{
-            //    this.Munitions += 10;
-
-            //    if (this.Munitions == intialNumberOfMunitions)
-            //    {
-            //        break;
-            //    }
-            //}
-        }
-
+    
         public override string ToString()
         {
             StringBuilder playerStatus = new StringBuilder();

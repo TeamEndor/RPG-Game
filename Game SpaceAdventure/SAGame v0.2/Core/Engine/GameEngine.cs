@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -8,6 +9,7 @@ using SAGame_v0._2.Enums;
 using SAGame_v0._2.GameDataBase;
 using SAGame_v0._2.Interfaces;
 using SAGame_v0._2.Items;
+using SAGame_v0._2.Items.Weapons;
 
 namespace SAGame_v0._2.Core.Engine
 {
@@ -34,21 +36,34 @@ namespace SAGame_v0._2.Core.Engine
             this.factory = factory;
         }
 
-        public virtual void Run()
+        public bool IsRunning { get; private set; }
+
+
+        public void Run()
         {
 
             var message = ChooseShipMessage();
             this.renderer.WriteLine(message);
             this.AddEnemies();
             this.AddItems();
+            this.IsRunning = true;
             
-            
-            while (true)
+
+            while (this.IsRunning)
             {
+                
                 var input = this.reader.ReadLine();
                 var inputInfo = input.Split().ToArray();
                 ExecuteCommand(inputInfo);
                 this.DisplayMap();
+                if (dataBase.Player[0].ShieldStatus < 0)
+                {
+                    this.ClearScreen();
+                    this.renderer.WriteLine("You were defeated!!!");
+                    break;
+                }
+
+
             }
         }
 
@@ -118,7 +133,7 @@ namespace SAGame_v0._2.Core.Engine
 
         private void AddEnemies()
         {
-            
+
             int randEnemyCount = Rand.Next(MinEnemyCount, MaxEnemyCount);
             for (int i = 0; i < randEnemyCount; i++)
             {
@@ -331,6 +346,12 @@ namespace SAGame_v0._2.Core.Engine
 
             while (enemy.ShieldStatus > 0)
             {
+
+                if (dataBase.Player[0].ShieldStatus < 0)
+                {
+                    break;
+                }
+
                 this.renderer.WriteLine("Do you want to attack? (y/n)");
 
                 string choice = this.reader.ReadLine();
@@ -354,19 +375,38 @@ namespace SAGame_v0._2.Core.Engine
         }
         private void PerformAttack(ICharacter enemy)
         {
+            dataBase.Player[0].Damage = UpdateDamage();
             dataBase.Player[0].Attack(enemy);
 
-            if (enemy.ShieldStatus == 0)
+           
+
+            if (enemy.ShieldStatus <= 0)
             {
                 this.dataBase.Enemy.Remove(enemy);
                 this.renderer.WriteLine("Enemy was defeated!");
                 return;
             }
-
+            
             enemy.Attack(this.dataBase.Player[0]);
             this.renderer.WriteLine("Damage taken!");
-            this.renderer.WriteLine("Player hit points: {0}", this.dataBase.Player[0].ShieldStatus);
-            this.renderer.WriteLine("Enemy hit points: {0}" , enemy.ShieldStatus);
+            this.renderer.WriteLine("Player shield points: {0}", this.dataBase.Player[0].ShieldStatus);
+            this.renderer.WriteLine("Enemy shield points: {0}" , enemy.ShieldStatus);
+        }
+
+        private int UpdateDamage()
+        {
+            if (this.dataBase.Inventory.Any())
+            {
+                int updatedDamage = this.dataBase.Player[0].Damage;    //////////////////////////////////////////this.damage
+
+                updatedDamage += this.dataBase.Inventory
+                    .Where(w => w is Weapon)
+                    .Cast<Weapon>()
+                    .Select(w => w.Damage)
+                    .Max();
+                return updatedDamage;
+            }
+            return this.dataBase.Player[0].Damage;
         }
 
         private void PrintStatus()
@@ -396,6 +436,11 @@ namespace SAGame_v0._2.Core.Engine
                             "status --> pints the current player status" + Environment.NewLine +
                             "exit --> ends the game");
             this.renderer.WriteLine(help.ToString());
+        }
+
+        private void ClearScreen()
+        {
+            this.renderer.Clear();
         }
     }
 }

@@ -3,8 +3,8 @@
     public class WarShip : Enemy
     {
         private const string DefaultWarShipName = "Warship";
-        private const int DefaultWarShipDamage = 100;
-        private const int DefaultWarShipShieldStatus = 270;
+        private const int DefaultWarShipDamage = 80;
+        private const int DefaultWarShipShieldStatus = 1000;
 
         public WarShip(Position position) 
             : base(DefaultWarShipName, DefaultWarShipDamage, DefaultWarShipShieldStatus, position)

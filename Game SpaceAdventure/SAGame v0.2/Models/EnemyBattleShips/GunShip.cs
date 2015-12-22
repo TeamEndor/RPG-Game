@@ -4,7 +4,7 @@
     {
         private const string DefaultGunShipName = "Gunship";
         private const int DefaultGunShipDamage = 60;
-        private const int DefaultGunShipShieldStatus = 150;
+        private const int DefaultGunShipShieldStatus = 900;
 
         public GunShip(Position position) 
             : base(DefaultGunShipName, DefaultGunShipDamage, DefaultGunShipShieldStatus, position)

@@ -3,8 +3,8 @@
     public class RamShip : Enemy
     {
         private const string DefaultRamShipName = "Ramship";
-        private const int DefaultRamShipDamage = 150;
-        private const int DefaultRamShipShieldStatus = 200;
+        private const int DefaultRamShipDamage = 50;
+        private const int DefaultRamShipShieldStatus = 800;
 
         public RamShip(Position position) 
             : base(DefaultRamShipName, DefaultRamShipDamage, DefaultRamShipShieldStatus, position)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using SAGame_v0._2.Enums;
@@ -19,13 +20,16 @@ namespace SAGame_v0._2.Core.Engine
         private const int MaxItemsCount = 20;
 
         private const int MinEnemyCount = 5;
-        private const int MaxEnemyCount = 50;
+        private const int MaxEnemyCount = 20;
+     
 
         private static readonly Random Rand = new Random();
         private readonly IInputReader reader;
         private readonly IRenderer renderer;
         private readonly IDataBase dataBase;
         private readonly IFactory factory;
+       
+
         
 
         public GameEngine(IInputReader reader, IRenderer renderer, IDataBase dataBase, IFactory factory)
@@ -56,6 +60,13 @@ namespace SAGame_v0._2.Core.Engine
                 var inputInfo = input.Split().ToArray();
                 ExecuteCommand(inputInfo);
                 this.DisplayMap();
+                int enemiesLeft = this.dataBase.Enemy.Count();
+                if (enemiesLeft == 0)
+                {
+                    this.ClearScreen();
+                    this.renderer.WriteLine("Victory!!!");
+                    break;
+                }
                 if (dataBase.Player[0].ShieldStatus < 0)
                 {
                     this.ClearScreen();
@@ -372,6 +383,7 @@ namespace SAGame_v0._2.Core.Engine
         private void PerformAttack(ICharacter enemy)
         {
             dataBase.Player[0].Damage = UpdateDamage();
+           
             dataBase.Player[0].Attack(enemy);
 
            
@@ -380,6 +392,7 @@ namespace SAGame_v0._2.Core.Engine
             {
                 this.dataBase.Enemy.Remove(enemy);
                 this.renderer.WriteLine("Enemy was defeated!");
+                this.dataBase.Player[0].AutoRepair();
                 return;
             }
             
@@ -404,6 +417,7 @@ namespace SAGame_v0._2.Core.Engine
             }
             return this.dataBase.Player[0].Damage;
         }
+        
 
         private void PrintStatus()
         {

@@ -66,6 +66,8 @@ namespace SAGame_v0._2.Models.PlayerBattleShips
             this.inventory.Add(item);
         }
 
+        public abstract void AutoRepair();
+       
     
         public override string ToString()
         {

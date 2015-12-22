@@ -22,5 +22,11 @@ namespace SAGame_v0._2.Models.PlayerBattleShips
                   DefaultMillenniumFalconEnergy)
         {
         }
+        public override void AutoRepair()
+        {
+            this.ShieldStatus = DefaultMillenniumFalconShieldStatus;
+
+        }
+
     }
 }

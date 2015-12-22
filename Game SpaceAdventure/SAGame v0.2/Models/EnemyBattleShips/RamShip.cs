@@ -4,7 +4,7 @@
     {
         private const string DefaultRamShipName = "Ramship";
         private const int DefaultRamShipDamage = 50;
-        private const int DefaultRamShipShieldStatus = 800;
+        private const int DefaultRamShipShieldStatus = 80;
 
         public RamShip(Position position) 
             : base(DefaultRamShipName, DefaultRamShipDamage, DefaultRamShipShieldStatus, position)

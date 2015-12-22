@@ -17,6 +17,12 @@
         {
         }
 
+        public override void AutoRepair()
+        {
+            this.ShieldStatus = DefaultStartfighterShieldStatus;
+
+        }
+
 
     }
 }

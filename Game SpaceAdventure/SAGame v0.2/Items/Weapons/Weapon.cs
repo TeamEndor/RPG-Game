@@ -29,5 +29,12 @@ namespace SAGame_v0._2.Items.Weapons
                 this.damage = value;
             }
         }
+
+        public override string ToString()
+        {
+            StringBuilder weapon = new StringBuilder();
+            weapon.Append(base.ToString() + " " + this.Damage);
+            return weapon.ToString();
+        }
     }
 }

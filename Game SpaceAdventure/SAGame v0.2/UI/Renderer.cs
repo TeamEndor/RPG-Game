@@ -14,6 +14,11 @@ namespace SAGame_v0._2.UI
             Console.WriteLine(output, parameters);
         }
 
+        public void WriteLine(string output)
+        {
+            Console.WriteLine(output);
+        }
+
         public void Clear()
         {
             Console.Clear();

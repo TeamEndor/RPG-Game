@@ -11,6 +11,7 @@ using SAGame_v0._2.GameDataBase;
 using SAGame_v0._2.Interfaces;
 using SAGame_v0._2.Items;
 using SAGame_v0._2.Items.Weapons;
+using SAGame_v0._2.Models.PlayerBattleShips;
 
 namespace SAGame_v0._2.Core.Engine
 {
@@ -67,7 +68,14 @@ namespace SAGame_v0._2.Core.Engine
                     this.renderer.WriteLine("Victory!!!");
                     break;
                 }
-                if (dataBase.Player[0].ShieldStatus < 0)
+                int itemsLeft = this.dataBase.Items.Count();
+                if (itemsLeft == 0)
+                {
+                    this.ClearScreen();
+                    this.renderer.WriteLine("Victory!!!");
+                    break;
+                }
+                if (this.dataBase.Player.Any() && this.dataBase.Player[0].ShieldStatus < 0)
                 {
                     this.ClearScreen();
                     this.renderer.WriteLine("You were defeated!!!");
@@ -167,7 +175,7 @@ namespace SAGame_v0._2.Core.Engine
             int randItemsCount = Rand.Next(MinItemsCount, MaxItemsCount);
             for (int i = 0; i < randItemsCount; i++)
             {
-                
+
                 int itemRandPosX = Rand.Next(1, Constants.MapWidth - 1);
                 int itemRandPosY = Rand.Next(1, Constants.MapHeight - 1);
 
@@ -210,6 +218,11 @@ namespace SAGame_v0._2.Core.Engine
 
         private void DisplayMap()
         {
+            if (this.dataBase.Player.Count == 0)
+            {
+                return;
+            }
+
             StringBuilder map = new StringBuilder();
             for (int row = 0; row < Constants.MapHeight; row++)
             {
@@ -229,7 +242,7 @@ namespace SAGame_v0._2.Core.Engine
                             }
                         }
                     }
-                    else if (this.dataBase.Items.Any())
+                    if (this.dataBase.Items.Any())
                     {
                         foreach (var item in this.dataBase.Items)
                         {
@@ -321,11 +334,14 @@ namespace SAGame_v0._2.Core.Engine
             var collidingObject = this.dataBase.Enemy.
                 FirstOrDefault(e => e.Position.Equals(this.dataBase.Player[0].Position));
 
-            var item = collidingObject as Item;
+            var item = this.dataBase.Items.
+                FirstOrDefault(e => e.Position.Equals(this.dataBase.Player[0].Position));
+
+            //var item = collidingObject as Item;
 
             if (item != null)
             {
-                this.dataBase.Player[0].AddItemToInventory(item);
+                this.dataBase.AddToPlayerInventory(item);
                 this.renderer.WriteLine("Added item to inventory:" + item.GetType().Name);
                 item.State = ItemState.Collected;
             }
@@ -428,8 +444,9 @@ namespace SAGame_v0._2.Core.Engine
                 playerStatus.Append(Environment.NewLine + "Items: ");
                 foreach (var item in this.dataBase.Inventory)
                 {
-                    playerStatus.AppendFormat(string.Join(" ,", item.Name));
+                    playerStatus.Append(item + ";");
                 }
+                playerStatus.Append(Environment.NewLine + "Player damage now: " + this.UpdateDamage());
             }
             this.renderer.WriteLine(playerStatus.ToString());
         }
@@ -444,7 +461,10 @@ namespace SAGame_v0._2.Core.Engine
                             "a --> go left" + Environment.NewLine +
                             "d --> go right" + Environment.NewLine +
                             "status --> pints the current player status" + Environment.NewLine +
-                            "exit --> ends the game");
+                            "exit --> ends the game" + Environment.NewLine +
+                            "Player: Starfighter --> S; MillenniumFalcon --> M" + Environment.NewLine +
+                            "Enemies: Gunship --> G; Ramship --> R; Warship --> W;" + Environment.NewLine +
+                            "Items: Imperium --> I; RegularDC17 --> D;");
             this.renderer.WriteLine(help.ToString());
         }
 

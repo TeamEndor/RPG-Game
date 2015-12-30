@@ -22,5 +22,12 @@ namespace SAGame_v0._2.Items
         public string Name { get; }
         public Position Position { get; set; }
         public ItemState State { get; set; }
+
+        public override string ToString()
+        {
+            StringBuilder item = new StringBuilder();
+            item.AppendFormat(this.Name);
+            return item.ToString();
+        }
     }
 }

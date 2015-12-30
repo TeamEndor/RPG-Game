@@ -73,7 +73,7 @@ namespace SAGame_v0._2.Models.PlayerBattleShips
         {
             StringBuilder playerStatus = new StringBuilder();
             playerStatus.Append(base.ToString());
-            playerStatus.AppendFormat(" , munitions: {0}, energy: {1}", this.Munitions, this.Energy);
+            playerStatus.AppendFormat(" , munitions: {0}, energy: {1}, damage: {2}", this.Munitions, this.Energy, this.Damage);
 
             return playerStatus.ToString();
         }
